@@ -1,0 +1,61 @@
+# Sample Document for Testing
+
+## Introduction
+
+This is a sample document for testing the Multi-Document RAG Agent system.
+The RAG system is designed to retrieve and answer questions about documents.
+
+## Key Features
+
+1. **Multi-Format Support**: The system supports PDF, DOCX, and PPTX formats
+2. **Vector Database**: Uses Chroma for efficient semantic search
+3. **Advanced Embeddings**: Leverages sentence-transformers for better understanding
+4. **LLM Integration**: Integrates with Hugging Face models for question answering
+
+## Architecture Components
+
+### Document Loading
+The system loads documents from the `documents/` directory and processes them
+into semantic chunks using recursive text splitting.
+
+### Vector Store
+Chroma provides persistent storage of document embeddings, enabling fast
+semantic similarity searches.
+
+### RAG Pipeline
+The RAG pipeline combines retrieval and generation:
+1. User submits a question
+2. System retrieves relevant documents from vector store
+3. LLM generates an answer based on retrieved context
+
+## Usage
+
+```bash
+# Index documents
+python main.py --index
+
+# Ask a question
+python main.py --query "What is RAG?"
+
+# Interactive mode
+python main.py --interactive
+```
+
+## Configuration
+
+All settings are centralized in `src/config.py`:
+- Embedding model: all-MiniLM-L6-v2
+- LLM: google/flan-t5-base
+- Vector store: Chroma
+- Chunk size: 1000 characters
+- Retrieval count: 4 documents
+
+## LangChain Best Practices
+
+This implementation follows official LangChain recommendations:
+- Modular architecture with separated concerns
+- Lazy loading of expensive resources (LLM, embeddings)
+- Proper error handling and logging
+- LCEL for chain composition
+- Configuration management
+- Document metadata preservation
